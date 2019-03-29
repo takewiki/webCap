@@ -97,6 +97,18 @@ web2_post_bodyJson <- function(url,namedList) {
   
 }
 
+
+#' 处理post的数据类型
+#'
+#' @param type 数据类型
+#'
+#' @return 返回值
+#' @export
+#'
+#' @examples post_type();
+post_type <- function(type=c('json','form','query','header')){
+  match.arg(type)
+}
 # end of post area-------
 
 #' 显示网页相关状态
@@ -209,6 +221,44 @@ web2_decode_json <- function(page,encoding='UTF-8'){
 web2_error <-function(page){
   http_error(page)
 }
+
+
+#' 登录窗口
+#'
+#' @param url 链接
+#' @param user 用户名
+#' @param password 密码
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_login_basic
+web2_login_basic <- function(url="http://httpbin.org/basic-auth/user/passwd",user="user",password="passwd") {
+  
+      GET(url,authenticate(user, password))
+}
+
+
+#' Title  timer
+#'
+#' @param count  count
+#' @param interval interval in second
+#' @param f  function
+#'
+#' @return return
+#' @export
+#'
+#' @examples timer(f=print)
+timer <- function(count=100,interval=1,f){
+  lapply(1:count,function(x){
+    Sys.sleep(interval)
+    f(x)
+  });
+}
+
+
+
 
 
 
