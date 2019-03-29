@@ -14,6 +14,26 @@ web2_get <- function(url='https://search.51job.com/list/020000,000000,0000,00,9,
   
 }
 
+
+#' 处理post相应的功能wrapper
+#'
+#' @param url 网址
+#' @param config 配置
+#' @param ... 其他
+#' @param body 表体
+#' @param encode 编码
+#' @param handle 处理
+#'
+#' @return 返回值
+#' @export
+#'
+#' @examples web2_post();
+web2_post <- function(url = NULL, config = list(), ..., body = NULL,
+                      encode = c("multipart", "form", "json", "raw"), handle = NULL) {
+  POST(url=url,config=config,...,body = body,encode=encode,handle = handle)
+  
+}
+
 #' 显示网页相关状态
 #'
 #' @param page 网页
@@ -75,3 +95,51 @@ web2_body <- function(page,type='text',encoding="UTF-8"){
   return(res)
 }
 
+
+#' 获取网页返回的数据类型xml or jason
+#'
+#' @param page 
+#'
+#' @return  返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_type();
+web2_type <- function(page) {
+  res <-http_type(page)
+  res2 <-switch (res,
+                 "application/json" = 'json',
+                 "text/xml" = 'xml'
+  )
+  res2
+  
+}
+
+#' 将response的json对象进行翻译list
+#'
+#' @param page 页面对照
+#' @param encoding 编码
+#'
+#' @return 返回值
+#' @import jsonlite
+#'
+#' @examples web2_decode_json
+web2_decode_json <- function(page,encoding='UTF-8'){
+  res2 <-web2_body(page,type='text',encoding = encoding)
+  res3 <-fromJSON(txt =res2 ,simplifyVector = FALSE)
+  return(res3)
+}
+
+
+#' 如果访问网页对象发错误返回true
+#'
+#' @param page 
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_error()
+web2_error <-function(page){
+  http_error(page)
+}
