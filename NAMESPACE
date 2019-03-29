@@ -3,6 +3,7 @@
 S3method(print,api_github)
 export(api_github)
 export(web2_body)
+export(web2_decode_json)
 export(web2_error)
 export(web2_get)
 export(web2_is.success)

@@ -122,6 +122,7 @@ web2_type <- function(page) {
 #'
 #' @return 返回值
 #' @import jsonlite
+#' @export
 #'
 #' @examples web2_decode_json
 web2_decode_json <- function(page,encoding='UTF-8'){
