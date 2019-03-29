@@ -14,7 +14,7 @@ web2_get <- function(url='https://search.51job.com/list/020000,000000,0000,00,9,
   
 }
 
-
+# start of post area----
 #' 处理post相应的功能wrapper
 #'
 #' @param url 网址
@@ -33,6 +33,71 @@ web2_post <- function(url = NULL, config = list(), ..., body = NULL,
   POST(url=url,config=config,...,body = body,encode=encode,handle = handle)
   
 }
+
+
+
+#' 通过头文件传递参数
+#'
+#' @param url post的目标URL
+#' @param namedList 要传入的数据
+#'
+#' @return 返回值
+#' @export
+#' @import httr
+#'
+#' @examples web2_post_header();
+web2_post_header <- function(url,namedList){
+  
+  web2_post(url = url, add_headers(.headers = unlist(namedList)));
+}
+
+#' 通过参数向url传递数据
+#'
+#' @param url post的目标url
+#' @param namedList 数据
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_post_query();
+web2_post_query <- function(url,namedList){
+  web2_post(url=url, query = namedList);
+}
+
+
+#' 通过表体传递数据
+#'
+#' @param url post的目标url
+#' @param namedList  数据
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_post_bodyForm();
+web2_post_bodyForm <- function(url,namedList) {
+  
+  web2_post(url = url, body = namedList, encode = "form");
+  
+}
+
+#' 通过body向url传递数据
+#'
+#' @param url post的目标url
+#' @param namedList 数据
+#'
+#' @return 返回值
+#' @import httr
+#' @export 
+#'
+#' @examples  web2_post_bodyJson();
+web2_post_bodyJson <- function(url,namedList) {
+    web2_post(url = url, body = namedList, encode = "json");
+  
+}
+
+# end of post area-------
 
 #' 显示网页相关状态
 #'
@@ -144,3 +209,8 @@ web2_decode_json <- function(page,encoding='UTF-8'){
 web2_error <-function(page){
   http_error(page)
 }
+
+
+
+
+
