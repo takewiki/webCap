@@ -29,3 +29,12 @@ length(TEXT);
 View(TEXT);
 
 
+------
+  
+  library(webCap);
+web2_testAvgTime() ->bbb;
+class(bbb);
+
+web2_testAvgTime('http://www.baidu.com');
+
+web2_testAvgTime('http://www.reshapedata.com');

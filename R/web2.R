@@ -8,8 +8,9 @@
 #' @export
 #'
 #' @examples web_get();
-web2_get <- function(url='https://search.51job.com/list/020000,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E7%25A7%2591%25E5%25AD%25A6,2,1.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=4&dibiaoid=0&address=&line=&specialarea=00&from=&welfare='){
-  page1 <- GET(url);
+web2_get <- function(url='https://search.51job.com/list/020000,000000,0000,00,9,99,%25E6%2595%25B0%25E6%258D%25AE%25E7%25A7%2591%25E5%25AD%25A6,2,1.html?lang=c&stype=1&postchannel=0000&workyear=99&cotype=99&degreefrom=99&jobterm=99&companysize=99&lonlat=0%2C0&radius=-1&ord_field=0&confirmdate=9&fromType=4&dibiaoid=0&address=&line=&specialarea=00&from=&welfare=',
+                     config=list(),...,handle=NULL){
+  page1 <- GET(url,config = config,...,handle = handle);
   return(page1)
   
 }
@@ -258,6 +259,23 @@ timer <- function(count=100,interval=1,f){
 }
 
 
+
+#' 测试平台连接时间
+#'
+#' @param url 网址
+#' @param path 首页页地index.html
+#' @param times 连接次数
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples web2_testAvgTime
+web2_testAvgTime <- function(url='http://had.co.nz',path='index.html',times=20){
+  rowMeans(replicate(times,
+                     GET(url=url, path = "index.html")$times)
+  )
+}
 
 
 

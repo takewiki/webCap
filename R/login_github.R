@@ -57,6 +57,28 @@ print.api_github <- function(x, ...) {
   invisible(x)
 }
 
+#' 获取github的token设置
+#'
+#' @param key  key
+#' @param secret   secret
+#'
+#' @return 返回值
+#' @import httr
+#' @export
+#'
+#' @examples api_github_token()
+api_github_token <- function(key,secret){
+  
+  github_endpoint <-oauth_endpoints("github")
 
+  github_app <- oauth_app("github",
+                     key = key,
+                     secret = secret)
+  github_token <- oauth2.0_token(github_endpoint, github_app)
+  
+  gtoken <- config(token = github_token)
+  return(gtoken);
+  
+}
 
 
