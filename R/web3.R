@@ -18,6 +18,21 @@ web3_session <- function(host='www.reshapedata.com',timeout=5000,mode='INFO'){
   return(s)
 }
 
+
+#' 退出session会话
+#'
+#' @param session 会议 
+#'
+#' @return 返回值
+#' @import webdriver
+#' @export
+#'
+#' @examples web3_session_exit();
+web3_session_exit <- function(session){
+  session$delete();
+  
+}
+
 #' 获取一个或多少element对照
 #'
 #' @param session 会话对照
